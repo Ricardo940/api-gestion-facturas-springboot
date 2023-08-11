@@ -5,6 +5,8 @@ import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+@NamedQuery(name = "Factura.getFacturas", query = "SELECT f FROM Factura f order by f.id desc")
+@NamedQuery(name = "Factura.getFacturasByUsername", query = "SELECT f FROM Factura f where f.createBy=:username order by f.id desc")
 @Entity
 @Table(name = "facturas")
 @Data
@@ -21,6 +23,7 @@ public class Factura {
     private String numeroContacto;
     private String metodoPago;
     private Double total;
+    @Column(columnDefinition = "json")
     private String productoDetalles;
     private String createBy;
 }
